@@ -1,6 +1,6 @@
 # ✈ Flight Fare Intelligence Dashboard
 
-A clean, production-ready **Streamlit** analytics dashboard for India's domestic flight market — combining interactive data visualisation, grouped analytics, and a **Random Forest AI fare predictor** trained on 300,000+ real flight records.
+A clean, production-ready **Streamlit** analytics dashboard for India's domestic flight market — combining interactive data visualisation, grouped analytics, and a **Random Forest AI fare predictor** trained on 300,000+ real flight records. 
 
 ---
 
