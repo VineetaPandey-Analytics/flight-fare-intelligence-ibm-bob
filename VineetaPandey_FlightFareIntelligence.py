@@ -880,6 +880,12 @@ with tab5:
                 </div>
                 """, unsafe_allow_html=True)
 
+                google_flights_url = (
+                    f"https://www.google.com/travel/flights?q=Flights%20from%20"
+                    f"{p_source}%20to%20{p_dest}"
+                )
+                st.link_button("🌐 Check Live Fares on Google Flights", google_flights_url, use_container_width=True)
+
                 if data_avg:
                     delta_pct = ((pred_fare - data_avg) / data_avg) * 100
                     direction = "above" if delta_pct > 0 else "below"
