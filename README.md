@@ -16,6 +16,17 @@ A clean, production-ready **Streamlit** analytics dashboard for India's domestic
 
 ---
 
+## 🛠️ Tech Stack & Architecture
+
+| Layer | Technology |
+|-------|-----------|
+| **Frontend (UI & Visuals)** | Streamlit, Plotly Express / Graph Objects, Custom CSS |
+| **Backend & Logic** | Python 3.9+, Pandas, NumPy |
+| **Machine Learning** | Scikit-learn (Random Forest Regressor) |
+| **Data Source** | [Kaggle — Flight Fare Prediction Dataset](https://www.kaggle.com/code/varunsaikanuri/flight-fare-prediction-10-ml-models/input) |
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -32,7 +43,7 @@ A clean, production-ready **Streamlit** analytics dashboard for India's domestic
 
 | Property | Value |
 |----------|-------|
-| **Source** | India Domestic Flight Fare Dataset |
+| **Source** | [Kaggle — Flight Fare Prediction Dataset](https://www.kaggle.com/code/varunsaikanuri/flight-fare-prediction-10-ml-models/input) |
 | **Records** | 300,153 (after cleaning) |
 | **Airlines** | 6 — IndiGo, Air India, Vistara, SpiceJet, AirAsia, GO FIRST |
 | **Cities** | 6 — Delhi, Mumbai, Bangalore, Chennai, Hyderabad, Kolkata |
