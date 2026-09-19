@@ -233,6 +233,16 @@ All five tabs react live to the following filters:
 
 ---
 
+## ✨ Key Features
+
+- **Interactive Analytics Dashboard** — 5 dedicated tabs covering KPI overview, price analytics, route & airline breakdowns, insights, and AI fare prediction
+- **AI Fare Predictor** — Random Forest model (R² ~0.97) trained on 300,000+ records for instant fare estimation from 8 user inputs
+- **Live Market Verification** — Integrated dynamic, parameter-based redirection buttons to Google Flights for real-time market price cross-checking
+- **Global Sidebar Filters** — Airline, cabin class, days-left range, and source city filters applied live across all tabs
+- **Custom Design System** — Navy/teal/slate palette with styled KPI cards, tab bar, and currency-formatted Plotly axes
+
+---
+
 ## 📌 Key Findings
 
 - **Last-minute bookings** cost ~113% more than 30+ day advance purchases
