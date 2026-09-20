@@ -834,33 +834,34 @@ with tab5:
             if p_source == p_dest:
                 st.error("Source and destination cities must be different.")
             else:
-                # Encode inputs
-                def safe_encode(le, val):
-                    if val in le.classes_:
-                        return le.transform([val])[0]
-                    return 0
+                with st.spinner("Calculating fare estimate…"):
+                    # Encode inputs
+                    def safe_encode(le, val):
+                        if val in le.classes_:
+                            return le.transform([val])[0]
+                        return 0
 
-                row = {
-                    "airline":           safe_encode(encoders["airline"],          p_airline),
-                    "source_city":       safe_encode(encoders["source_city"],       p_source),
-                    "destination_city":  safe_encode(encoders["destination_city"],  p_dest),
-                    "departure_time":    safe_encode(encoders["departure_time"],    p_dep),
-                    "stops_num":         stops_val,
-                    "days_left":         p_days,
-                    "duration":          p_dur,
-                    "class":             safe_encode(encoders["class"],             p_class),
-                }
-                input_df = pd.DataFrame([row])
-                pred_fare = model.predict(input_df)[0]
+                    row = {
+                        "airline":           safe_encode(encoders["airline"],          p_airline),
+                        "source_city":       safe_encode(encoders["source_city"],       p_source),
+                        "destination_city":  safe_encode(encoders["destination_city"],  p_dest),
+                        "departure_time":    safe_encode(encoders["departure_time"],    p_dep),
+                        "stops_num":         stops_val,
+                        "days_left":         p_days,
+                        "duration":          p_dur,
+                        "class":             safe_encode(encoders["class"],             p_class),
+                    }
+                    input_df = pd.DataFrame([row])
+                    pred_fare = model.predict(input_df)[0]
 
-                # Comparable fare from data
-                comp = df[
-                    (df["airline"] == p_airline) &
-                    (df["source_city"] == p_source) &
-                    (df["destination_city"] == p_dest) &
-                    (df["class"] == p_class)
-                ]["price"]
-                data_avg = comp.mean() if not comp.empty else None
+                    # Comparable fare from data
+                    comp = df[
+                        (df["airline"] == p_airline) &
+                        (df["source_city"] == p_source) &
+                        (df["destination_city"] == p_dest) &
+                        (df["class"] == p_class)
+                    ]["price"]
+                    data_avg = comp.mean() if not comp.empty else None
 
                 st.markdown(f"""
                 <div style="background:linear-gradient(135deg,{TEAL},{SLATE});
@@ -884,7 +885,22 @@ with tab5:
                     f"https://www.google.com/travel/flights?q=Flights%20from%20"
                     f"{p_source}%20to%20{p_dest}"
                 )
-                st.link_button("🌐 Check Live Fares on Google Flights", google_flights_url, use_container_width=True)
+                st.markdown(f"""
+                <a href="{google_flights_url}" target="_blank" style="
+                    background-color:#d4edda;
+                    color:#155724;
+                    border:1px solid #c3e6cb;
+                    border-radius:8px;
+                    padding:12px 18px;
+                    text-decoration:none;
+                    display:block;
+                    text-align:center;
+                    font-weight:600;
+                    margin-top:12px;
+                    font-size:0.95rem;">
+                    🌐 Check Live Fares on Google Flights
+                </a>
+                """, unsafe_allow_html=True)
 
                 if data_avg:
                     delta_pct = ((pred_fare - data_avg) / data_avg) * 100
