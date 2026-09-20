@@ -1,6 +1,6 @@
 # ✈ Flight Fare Intelligence Dashboard
 
-A clean, production-ready **Streamlit** analytics dashboard for India's domestic flight market — combining interactive data visualisation, grouped analytics, and a **Random Forest AI fare predictor** trained on 300,000+ real flight records. 
+A clean, production-ready **Streamlit** analytics dashboard for India's domestic flight market — combining interactive data visualisation, grouped analytics, and a **Random Forest AI fare predictor** trained on 300,000+ real flight records.
 
 ---
 
@@ -250,6 +250,45 @@ All five tabs react live to the following filters:
 - **Vistara** is the most expensive airline; **AirAsia** the most affordable (2× spread)
 - **Business class** averages ~4–5× Economy fare on domestic Indian routes
 - Fares follow a **U-curve** vs days-to-departure: lowest 20–35 days out, spiking near day 1
+
+---
+
+## 💹 Advanced Pricing Framework
+
+Extending the two core strategies (tiered advance-booking ladder & peak-hour surcharges) with three analytical layers for a complete revenue management system.
+
+### Layer 1 — Occupancy / Load Factor Triggers
+
+| Load Band | Occupancy | Fare Multiplier | Action |
+|-----------|-----------|-----------------|--------|
+| **Low** | < 50% | 0.85× base fare | Stimulate demand — discount to fill seats |
+| **Target** | 50–75% | 1.00× base fare | Hold — equilibrium zone, no adjustment |
+| **High** | 75–90% | 1.25× base fare | Yield mode — moderate premium |
+| **Critical** | > 90% | 1.50–2.00× base fare | Full surge — capture peak willingness-to-pay |
+
+> **Decision rule:** `adjusted_fare = base_fare × load_multiplier(occupancy_pct)`
+> Trigger recalculation every 6 hours or whenever a booking event crosses a band boundary.
+
+### Layer 2 — Route Segmentation
+
+| Segment | Criteria | Pricing Lever |
+|---------|----------|---------------|
+| **High-Yield Business Trunk** | Business class share > 30% (e.g. DEL–BOM, DEL–BLR) | Premium floor price; restrict discounting to ≥ 30 days |
+| **Leisure / Price-Sensitive** | Economy share > 95%, avg fare < ₹10,000 (e.g. MAA–CCU) | Aggressive early-bird offers; volume-fill priority |
+| **Thin / Low-Frequency** | < 500 flights in dataset | Flat base fare; no dynamic multiplier until data matures |
+| **Competitive Overlap** | ≥ 4 airlines on same route | Parity watch — cap surge at 1.3× to avoid share erosion |
+
+> **Segmentation refresh:** re-run quarterly or when a new airline enters/exits a route.
+
+### Layer 3 — Revenue KPIs
+
+| KPI | Formula | Target |
+|-----|---------|--------|
+| **Revenue per Available Seat-km (RASK)** | `Total Revenue ÷ (Seats × Route Distance km)` | Maximise; benchmark vs route average |
+| **Yield** | `Total Revenue ÷ Total Passenger-km` | Track per route segment; flag < ₹3.5 / km |
+| **Load Factor** | `Booked Seats ÷ Available Seats × 100` | 78–85% sweet spot balancing yield & volume |
+| **Advance Purchase Ratio** | `Bookings ≥ 15 days out ÷ Total Bookings` | ≥ 55% signals healthy demand distribution |
+| **Last-Minute Fare Premium** | `(Avg fare ≤ 7 days − Avg fare ≥ 30 days) ÷ Avg fare ≥ 30 days` | Monitor vs ~113% dataset baseline |
 
 ---
 
