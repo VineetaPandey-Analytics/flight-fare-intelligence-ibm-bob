@@ -30,11 +30,11 @@ A clean, production-ready **Streamlit** analytics dashboard for India's domestic
 ## 📁 Project Structure
 
 ```
-├── app.py                        # Main Streamlit application
-├── Flight Fare Prediction.csv    # Source dataset (300,153 records)
-├── Flight Fare Analytics.docx    # Project presentation (9 slides)
-├── requirements.txt              # Python dependencies
-└── README.md                     # This file
+├── VineetaPandey_FlightFareIntelligence.py       # Main Streamlit application
+├── Flight Fare Prediction.csv                    # Source dataset (300,153 records)
+├── Flight Fare Analytics.docx                    # Project presentation (9 slides)
+├── requirements.txt                              # Python dependencies
+└── README.md                                     # This file
 ```
 
 ---
@@ -146,8 +146,8 @@ Enter 8 inputs → get an instant AI-estimated fare with historical comparison.
 | **Max Depth** | 18 |
 | **Min Samples Leaf** | 4 |
 | **Train / Test Split** | 85% / 15% |
-| **MAE** | ~₹2,161 |
-| **R² Score** | ~0.97 |
+| **MAE** | ~₹1,407 |
+| **R² Score** | ~0.984 |
 
 All categorical features are label-encoded before training. The model is cached via `@st.cache_resource` and trained once on app startup.
 
@@ -206,7 +206,7 @@ python -m streamlit run VineetaPandey_FlightFareIntelligence.py
 
 The app will open at **http://localhost:8501** in your default browser.
 
-You can also access the fully functional live version of the dashboard here: [Live Streamlit Dashboard](https://flight-fare-intelligence-ibm-bob-eavwx77svfz5gavgrfhpj7.streamlit.app/)
+You can also access the fully functional live version of the dashboard here: Live Streamlit Dashboard **https://flight-fare-intelligence-ibm-bob-eavwx77svfz5gavgrfhpj7.streamlit.app/**
 
 ### Dependencies
 
