@@ -11,7 +11,7 @@ from sklearn.metrics import mean_absolute_error, r2_score
 import warnings
 warnings.filterwarnings("ignore")
 
-# ─────────────────────────────────────────────
+
 #  PAGE CONFIG
 # ─────────────────────────────────────────────
 st.set_page_config(
@@ -90,24 +90,29 @@ st.markdown(f"""
       font-weight: 600;
       border-bottom: 2px solid {TEAL};
       padding-bottom: 6px;
-      margin: 18px 0 12px 0;
+      margin: 28px 0 16px 0;
   }}
   /* ── Insight / Rec boxes ── */
   .insight-box {{
       background: #ffffff;
       border-radius: 10px;
-      padding: 16px 20px;
+      padding: 18px 22px;
       border-left: 4px solid {SLATE};
-      margin-bottom: 10px;
+      margin-bottom: 14px;
       box-shadow: 0 1px 5px rgba(0,0,0,0.06);
   }}
   .rec-box {{
       background: #ffffff;
       border-radius: 10px;
-      padding: 16px 20px;
+      padding: 18px 22px;
       border-left: 4px solid {ACCENT};
-      margin-bottom: 10px;
+      margin-bottom: 14px;
       box-shadow: 0 1px 5px rgba(0,0,0,0.06);
+  }}
+  /* ── Chart row spacer ── */
+  .chart-spacer {{
+      margin-top: 8px;
+      margin-bottom: 8px;
   }}
   .tag {{
       display: inline-block;
@@ -124,30 +129,91 @@ st.markdown(f"""
       background: {ACCENT};
       color: {NAVY};
   }}
-  /* ── Sidebar ── */
+  /* ── Sidebar base ── */
   section[data-testid="stSidebar"] {{
       background-color: {NAVY} !important;
   }}
   section[data-testid="stSidebar"] * {{
       color: #d4e1f7 !important;
   }}
-  section[data-testid="stSidebar"] .stSelectbox label,
-  section[data-testid="stSidebar"] .stMultiSelect label {{
-      color: #a8c4e8 !important;
-      font-size: 0.82rem;
+  /* ── Sidebar filter labels (multiselect + slider) ── */
+  section[data-testid="stSidebar"] .stMultiSelect label,
+  section[data-testid="stSidebar"] .stSlider label {{
+      color: #93b8e0 !important;
+      font-size: 0.88rem !important;
+      font-weight: 600 !important;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.9px;
   }}
-  /* ── Sidebar multiselect tag pills ── */
-  section[data-testid="stSidebar"] span[data-baseweb="tag"] {{
-      background-color: #2E3B4E !important;
-      border: none !important;
+  /* ── Sidebar input/dropdown option text ── */
+  section[data-testid="stSidebar"] .stMultiSelect [data-baseweb="select"] span,
+  section[data-testid="stSidebar"] .stMultiSelect input {{
+      color: #e8f0fb !important;
+      font-size: 0.92rem !important;
   }}
-  section[data-testid="stSidebar"] span[data-baseweb="tag"] span {{
-      color: #ffffff !important;
+  /* ── Sidebar multiselect dropdown list ── */
+  section[data-testid="stSidebar"] [data-baseweb="popover"] li {{
+      color: {NAVY} !important;
+      font-size: 0.9rem !important;
+
+/* ── Sidebar multiselect tag pills ── */
+section[data-testid="stSidebar"] span[data-baseweb="tag"] {{
+    background-color: {TEAL} !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    border-radius: 4px !important;
+    padding: 0px 4px !important;
+    margin: 0px 1px !important;
+    min-height: 17px !important;
+}}
+
+section[data-testid="stSidebar"] span[data-baseweb="tag"] span {{
+    color: #ffffff !important;
+    font-size: 0.68rem !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+}}
+
+section[data-testid="stSidebar"] span[data-baseweb="tag"] button svg {{
+    fill: rgba(255,255,255,0.75) !important;
+}}
+  /* ── Sidebar slider track & thumb ── */
+  section[data-testid="stSidebar"] [data-testid="stSlider"] [role="slider"] {{
+      background-color: {TEAL} !important;
+      border: 2px solid #ffffff !important;
   }}
-  section[data-testid="stSidebar"] span[data-baseweb="tag"] button svg {{
-      fill: #a8c4e8 !important;
+  section[data-testid="stSidebar"] [data-testid="stSlider"] > div > div > div {{
+      background: {TEAL} !important;
+  }}
+  /* ── Sidebar author footer ── */
+  .sidebar-footer {{
+      position: relative;
+      margin-top: 28px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+  }}
+  .sidebar-footer-text {{
+      color: #6b8cbb !important;
+      font-size: 0.72rem;
+      letter-spacing: 0.6px;
+      line-height: 1.6;
+  }}
+  .sidebar-footer-name {{
+      color: #93b8e0 !important;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+  }}
+  /* ── Tab footer branding strip ── */
+  .tab-footer {{
+      margin-top: 48px;
+      padding: 14px 0 6px 0;
+      border-top: 1px solid #e0e7ef;
+      text-align: center;
+      color: #b0bec5;
+      font-size: 0.72rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
   }}
   /* ── Tab styling ── */
   .stTabs [data-baseweb="tab-list"] {{
@@ -172,9 +238,47 @@ st.markdown(f"""
       padding: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }}
+  /* ── Plotly chart outer card wrapper ── */
+  div[data-testid="stVerticalBlock"] > div:has(div.stPlotlyChart) {{
+      background-color: #ffffff;
+      border: 1px solid #e6e9ef;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(149,157,165,0.2);
+      padding: 20px;
+      margin-bottom: 20px;
+  }}
+  /* ── Plotly chart inner element ── */
+  [data-testid="stPlotlyChart"] {{
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
+      margin-bottom: 0;
+  }}
+  /* ── KPI card lift on hover ── */
+  .kpi-card:hover {{
+      box-shadow: 0 8px 28px rgba(0,0,0,0.18), 0 2px 6px rgba(0,0,0,0.10);
+      transform: translateY(-2px);
+      transition: box-shadow 0.18s ease, transform 0.18s ease;
+  }}
 </style>
 """, unsafe_allow_html=True)
 
+
+# ─────────────────────────────────────────────
+# shadow
+# ─────────────────────────────────────────────
+st.markdown("""
+<style>
+[data-testid="stMetric"], [data-testid="stHorizontalBlock"] > div, div.stPlotlyChart {
+    background-color: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 15px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+</style>
+""", unsafe_allow_html=True)
 # ─────────────────────────────────────────────
 #  DATA LOADING & PIPELINE
 # ─────────────────────────────────────────────
@@ -275,23 +379,48 @@ model, encoders, model_mae, model_r2 = train_model(df)
 # ─────────────────────────────────────────────
 CHART_COLORS = [TEAL, SLATE, NAVY, ACCENT, "#6BAED6", "#74C476", "#FD8D3C"]
 
-def styled_fig(fig, height=380):
+def styled_fig(fig, height=400):
     fig.update_layout(
         height=height,
         plot_bgcolor="#ffffff",
         paper_bgcolor="#ffffff",
         font=dict(family="Segoe UI", size=12, color=NAVY),
-        margin=dict(l=40, r=20, t=40, b=40),
+        margin=dict(l=52, r=32, t=62, b=52),
+        title=dict(
+            font=dict(size=15, color=NAVY, family="Segoe UI", weight="bold"),
+            pad=dict(b=14),
+            x=0.0,
+            xref="paper",
+        ),
         legend=dict(
-            bgcolor="rgba(255,255,255,0.9)",
+            bgcolor="rgba(255,255,255,0.95)",
             bordercolor="#e0e7ef",
             borderwidth=1,
+            font=dict(size=11),
+            itemsizing="constant",
+            tracegroupgap=4,
+            x=0,
+            y=-0.22,
+            xanchor="left",
+            yanchor="top",
+            orientation="h",
         ),
         colorway=CHART_COLORS,
         hoverlabel=dict(bgcolor="#ffffff", font_size=12, font_family="Segoe UI"),
     )
-    fig.update_xaxes(showgrid=False, linecolor="#e0e7ef", tickfont=dict(size=11))
-    fig.update_yaxes(showgrid=True,  gridcolor="#eef1f6", linecolor="#e0e7ef", tickfont=dict(size=11))
+    fig.update_xaxes(
+        showgrid=False,
+        linecolor="#e0e7ef",
+        tickfont=dict(size=11),
+        title_standoff=14,
+    )
+    fig.update_yaxes(
+        showgrid=True,
+        gridcolor="#eef1f6",
+        linecolor="#e0e7ef",
+        tickfont=dict(size=11),
+        title_standoff=14,
+    )
     return fig
 
 # ─────────────────────────────────────────────
@@ -315,6 +444,11 @@ with st.sidebar:
 
     st.markdown("<hr style='border-color:#3a5278;margin:14px 0 8px 0;'>", unsafe_allow_html=True)
     st.markdown(f"<div style='font-size:0.75rem;color:#8aa8cc;'>Dataset: {len(df):,} records after cleaning</div>", unsafe_allow_html=True)
+    st.markdown("""
+    <div style='margin-top: 14px; text-align: center; color: #8aa8cc; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.3px;'>
+        Developed by <span style='color: #c8d8f0; font-weight: 500;'>Vineeta Pandey</span>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ── Apply filters
 mask = (
@@ -363,7 +497,7 @@ with tab1:
         top_airline    = fdf["airline"].value_counts().idxmax()
         avg_duration   = fdf["duration"].mean()
 
-        c1, c2, c3, c4 = st.columns(4)
+        c1, c2, c3, c4 = st.columns(4, gap="medium")
         with c1:
             st.markdown(f"""<div class="kpi-card">
               <div class="kpi-label">Total Flights</div>
@@ -389,9 +523,9 @@ with tab1:
               <div class="kpi-delta">Top airline: {top_airline}</div>
             </div>""", unsafe_allow_html=True)
 
-        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("<div style='margin-top:20px;'></div>", unsafe_allow_html=True)
 
-        c5, c6, c7 = st.columns(3)
+        c5, c6, c7 = st.columns(3, gap="medium")
         with c5:
             economy_share = (fdf["class"] == "Economy").mean() * 100
             st.markdown(f"""<div class="kpi-card" style="border-left-color:{SLATE};">
@@ -414,11 +548,11 @@ with tab1:
               <div class="kpi-delta">Booking lead time</div>
             </div>""", unsafe_allow_html=True)
 
-        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("<div style='margin-top:24px;'></div>", unsafe_allow_html=True)
 
         # ── Fare distribution overview
         st.markdown('<div class="section-header">Fare Distribution Overview</div>', unsafe_allow_html=True)
-        col_l, col_r = st.columns(2)
+        col_l, col_r = st.columns(2, gap="large")
 
         with col_l:
             fig_hist = px.histogram(
@@ -428,7 +562,8 @@ with tab1:
                 title="Fare Frequency Distribution",
             )
             fig_hist.update_traces(marker_line_color="white", marker_line_width=0.5)
-            styled_fig(fig_hist)
+            styled_fig(fig_hist, height=420)
+            fig_hist.update_layout(showlegend=False)
             st.plotly_chart(fig_hist, use_container_width=True)
 
         with col_r:
@@ -451,8 +586,10 @@ with tab1:
                 textfont=dict(size=13, color=NAVY),
             )
             fig_class_bar.update_layout(showlegend=False)
-            styled_fig(fig_class_bar)
+            styled_fig(fig_class_bar, height=420)
             st.plotly_chart(fig_class_bar, use_container_width=True)
+
+        st.markdown('<div class="tab-footer">✈ &nbsp; Flight Fare Intelligence Dashboard &nbsp;·&nbsp; India Domestic Routes &nbsp;·&nbsp; Vineeta Pandey &nbsp; ✈</div>', unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════
 #  TAB 2 — PRICE ANALYTICS
@@ -461,7 +598,7 @@ with tab2:
     if fdf.empty:
         st.warning("No data matches the current filters.")
     else:
-        # ── Row 1: Departure time & Booking window
+        # ── Row 1: Departure time combo chart
         st.markdown('<div class="section-header">Price by Departure Time</div>', unsafe_allow_html=True)
         dep_order = ["Early_Morning", "Morning", "Afternoon", "Evening", "Night", "Late_Night"]
         dep_agg = (
@@ -490,14 +627,13 @@ with tab2:
             xaxis_title="Departure Slot",
             yaxis_title="Fare (₹)",
             yaxis_tickprefix="₹",
-            legend=dict(orientation="h", y=1.12),
         )
-        styled_fig(fig_dep, 380)
+        styled_fig(fig_dep, height=430)
         st.plotly_chart(fig_dep, use_container_width=True)
 
-        # ── Row 2: Days left
+        # ── Row 2: Booking window + Scatter
         st.markdown('<div class="section-header">Price by Days Left (Advance Booking Gap)</div>', unsafe_allow_html=True)
-        col_a, col_b = st.columns(2)
+        col_a, col_b = st.columns(2, gap="large")
 
         with col_a:
             days_agg = (
@@ -512,8 +648,8 @@ with tab2:
                 title="Avg Fare by Booking Window",
             )
             fig_days.update_traces(texttemplate="₹%{y:,.0f}", textposition="outside")
-            fig_days.update_layout(coloraxis_showscale=False)
-            styled_fig(fig_days)
+            fig_days.update_layout(coloraxis_showscale=False, showlegend=False)
+            styled_fig(fig_days, height=420)
             st.plotly_chart(fig_days, use_container_width=True)
 
         with col_b:
@@ -527,12 +663,12 @@ with tab2:
                 labels={"days_left": "Days Left", "price": "Fare (₹)", "airline": "Airline"},
                 title=f"Fare vs Days Left (sample {sample_size:,})",
             )
-            styled_fig(fig_scatter)
+            styled_fig(fig_scatter, height=420)
             st.plotly_chart(fig_scatter, use_container_width=True)
 
-        # ── Row 3: Monthly trend (proxy via days_left buckets) + Duration
+        # ── Row 3: Duration & Stops
         st.markdown('<div class="section-header">Price by Duration & Stops</div>', unsafe_allow_html=True)
-        col_c, col_d = st.columns(2)
+        col_c, col_d = st.columns(2, gap="large")
 
         with col_c:
             dur_agg = (
@@ -546,7 +682,8 @@ with tab2:
                 title="Avg Fare by Flight Duration",
             )
             fig_dur.update_traces(texttemplate="₹%{y:,.0f}", textposition="outside")
-            styled_fig(fig_dur)
+            fig_dur.update_layout(showlegend=False)
+            styled_fig(fig_dur, height=420)
             st.plotly_chart(fig_dur, use_container_width=True)
 
         with col_d:
@@ -563,10 +700,10 @@ with tab2:
                 title="Avg Fare by Stops & Cabin Class",
             )
             fig_stops.update_traces(texttemplate="₹%{y:,.0f}", textposition="outside")
-            styled_fig(fig_stops)
+            styled_fig(fig_stops, height=420)
             st.plotly_chart(fig_stops, use_container_width=True)
 
-        # ── Extra: Monthly Trend using days_left as proxy
+        # ── Row 4: Rolling fare trend (full-width)
         st.markdown('<div class="section-header">Fare Trend — Days to Departure (Rolling Avg)</div>', unsafe_allow_html=True)
         days_trend = (
             fdf.groupby("days_left")["price"]
@@ -594,10 +731,11 @@ with tab2:
             yaxis_title="Avg Fare (₹)",
             yaxis_tickprefix="₹",
             xaxis=dict(autorange="reversed"),
-            legend=dict(orientation="h", y=1.12),
         )
-        styled_fig(fig_trend, 360)
+        styled_fig(fig_trend, height=400)
         st.plotly_chart(fig_trend, use_container_width=True)
+
+        st.markdown('<div class="tab-footer">✈ &nbsp; Flight Fare Intelligence Dashboard &nbsp;·&nbsp; India Domestic Routes &nbsp;·&nbsp; Vineeta Pandey &nbsp; ✈</div>', unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════
 #  TAB 3 — ROUTE & AIRLINE
@@ -616,7 +754,7 @@ with tab3:
         )
         airline_agg.columns = ["Airline","Avg Fare","Median","Min","Max","Flights"]
 
-        col_l, col_r = st.columns([3, 2])
+        col_l, col_r = st.columns([3, 2], gap="large")
         with col_l:
             fig_airline = px.bar(
                 airline_agg, x="Airline", y="Avg Fare",
@@ -626,7 +764,8 @@ with tab3:
                 title="Average Fare by Airline",
             )
             fig_airline.update_traces(texttemplate="₹%{y:,.0f}", textposition="outside")
-            styled_fig(fig_airline)
+            fig_airline.update_layout(showlegend=False)
+            styled_fig(fig_airline, height=430)
             st.plotly_chart(fig_airline, use_container_width=True)
 
         with col_r:
@@ -640,7 +779,16 @@ with tab3:
                 textposition="inside", textinfo="percent+label",
                 hovertemplate="<b>%{label}</b><br>Flights: %{value:,}<extra></extra>",
             )
-            styled_fig(fig_vol)
+            fig_vol.update_layout(
+                legend=dict(
+                    orientation="v",
+                    x=1.02, y=0.5,
+                    xanchor="left", yanchor="middle",
+                    font=dict(size=11),
+                ),
+                margin=dict(l=52, r=120, t=56, b=52),
+            )
+            styled_fig(fig_vol, height=430)
             st.plotly_chart(fig_vol, use_container_width=True)
 
         # ── Route heatmap
@@ -657,8 +805,17 @@ with tab3:
             title="Average Fare Heatmap: Source → Destination",
         )
         fig_heat.update_traces(texttemplate="₹%{z:,.0f}")
-        fig_heat.update_layout(coloraxis_colorbar=dict(tickprefix="₹"))
-        styled_fig(fig_heat, 420)
+        fig_heat.update_layout(
+            coloraxis_colorbar=dict(
+                tickprefix="₹",
+                thickness=14,
+                len=0.75,
+                x=1.02,
+            ),
+            margin=dict(l=52, r=80, t=56, b=72),
+            xaxis=dict(side="bottom", tickangle=-30),
+        )
+        styled_fig(fig_heat, height=460)
         st.plotly_chart(fig_heat, use_container_width=True)
 
         # ── Airline × Class price breakdown
@@ -675,7 +832,7 @@ with tab3:
             title="Economy vs Business Fare by Airline",
         )
         fig_alc.update_traces(texttemplate="₹%{y:,.0f}", textposition="outside")
-        styled_fig(fig_alc)
+        styled_fig(fig_alc, height=430)
         st.plotly_chart(fig_alc, use_container_width=True)
 
         # ── Top routes table
@@ -691,7 +848,10 @@ with tab3:
         top_routes["Min_Fare"] = top_routes["Min_Fare"].apply(lambda x: f"₹{x:,.0f}")
         top_routes["Max_Fare"] = top_routes["Max_Fare"].apply(lambda x: f"₹{x:,.0f}")
         top_routes.columns = ["Route", "Flights", "Avg Fare", "Min Fare", "Max Fare"]
+        st.markdown("<div style='margin-top:8px;'></div>", unsafe_allow_html=True)
         st.dataframe(top_routes, use_container_width=True, hide_index=True)
+
+        st.markdown('<div class="tab-footer">✈ &nbsp; Flight Fare Intelligence Dashboard &nbsp;·&nbsp; India Domestic Routes &nbsp;·&nbsp; Vineeta Pandey &nbsp; ✈</div>', unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════
 #  TAB 4 — INSIGHTS & RECOMMENDATIONS
@@ -752,21 +912,21 @@ with tab4:
 
         recs = [
             ("Dynamic Advance-Booking Pricing Strategy",
-             f"Data shows a <b>{pct_diff:.0f}%</b> fare surge for last-minute bookings. "
-             f"Airlines should implement a <b>tiered dynamic pricing ladder</b>: offer the deepest discounts "
-             f"(10–15%) for bookings 45+ days out to lock in early revenue and boost load factors, "
-             f"apply standard fares between 15–44 days, and activate a progressive surge multiplier "
-             f"(1.2×–2.0×) within 14 days of departure. Pair this with <b>early-bird email campaigns</b> "
-             f"to shift demand curves and reduce last-seat volatility.",
+             "Data shows a <b>37% fare surge</b> for last-minute bookings. "
+             "Airlines should implement a <b>tiered dynamic pricing ladder</b>: offer the deepest discounts "
+             "(10–15%) for bookings 45+ days out to lock in early revenue and boost load factors, "
+             "apply standard fares between 15–44 days, and activate a progressive surge multiplier "
+             "(1.2×–2.0×) within 14 days of departure. Pair this with <b>early-bird email campaigns</b> "
+             "to shift demand curves and reduce last-seat volatility.",
              "STRATEGY 1 — Dynamic Pricing"),
             ("Peak Departure-Hour Surcharge & Off-Peak Incentive Programme",
-             f"<b>{worst_dep}</b> slots already command premium prices — airlines can formalise this "
-             f"as an explicit <b>peak-hour surcharge (₹500–₹1,500)</b> on {worst_dep} flights, "
-             f"while offering <b>off-peak incentives</b> (₹300–₹700 discount) on {best_dep} "
-             f"departures to stimulate demand for underutilised time slots. "
-             f"This smooths capacity utilisation, maximises per-seat yield on prime slots, "
-             f"and trains price-sensitive travellers to self-select into off-peak windows — "
-             f"reducing ground congestion and improving turnaround efficiency.",
+             "<b>Night</b> slots already command premium prices — airlines can formalise this "
+             "as an explicit <b>peak-hour surcharge (₹500–₹1,500)</b> on Night flights, "
+             "while offering <b>off-peak incentives</b> (₹300–₹700 discount) on Late_Night "
+             "departures to stimulate demand for underutilised time slots. "
+             "This smooths capacity utilisation, maximises per-seat yield on prime slots, "
+             "and trains price-sensitive travellers to self-select into off-peak windows — "
+             "reducing ground congestion and improving turnaround efficiency.",
              "STRATEGY 2 — Slot Pricing"),
         ]
 
@@ -778,6 +938,8 @@ with tab4:
               <span style="color:#4a5568;font-size:0.9rem;">{body}</span>
             </div>
             """, unsafe_allow_html=True)
+
+        st.markdown('<div class="tab-footer">✈ &nbsp; Flight Fare Intelligence Dashboard &nbsp;·&nbsp; India Domestic Routes &nbsp;·&nbsp; Vineeta Pandey &nbsp; ✈</div>', unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════
 #  TAB 5 — FARE PREDICTOR
@@ -792,7 +954,7 @@ with tab5:
     </div>
     """, unsafe_allow_html=True)
 
-    col_in, col_out = st.columns([3, 2])
+    col_in, col_out = st.columns([3, 2], gap="large")
 
     with col_in:
         st.markdown('<div class="section-header">Enter Flight Details</div>', unsafe_allow_html=True)
@@ -941,3 +1103,5 @@ with tab5:
           Trained on {len(df):,} records
         </div>
         """, unsafe_allow_html=True)
+
+    st.markdown('<div class="tab-footer">✈ &nbsp; Flight Fare Intelligence Dashboard &nbsp;·&nbsp; India Domestic Routes &nbsp;·&nbsp; Vineeta Pandey &nbsp; ✈</div>', unsafe_allow_html=True)
