@@ -32,7 +32,7 @@ A clean, production-ready **Streamlit** analytics dashboard for India's domestic
 ```
 ├── VineetaPandey_FlightFareIntelligence.py       # Main Streamlit application
 ├── Flight Fare Prediction.csv                    # Source dataset (300,153 records)
-├── Flight Fare Analytics.docx                    # Project presentation (9 slides)
+├── Vineetapandey_ProjectReport_Final.docx        # Project presentation (9 slides)
 ├── requirements.txt                              # Python dependencies
 └── README.md                                     # This file
 ```
