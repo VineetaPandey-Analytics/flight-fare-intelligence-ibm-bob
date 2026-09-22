@@ -206,6 +206,8 @@ python -m streamlit run VineetaPandey_FlightFareIntelligence.py
 
 The app will open at **http://localhost:8501** in your default browser.
 
+You can also access the fully functional live version of the dashboard here: [Live Streamlit Dashboard](https://flight-fare-intelligence-ibm-bob-eavwx77svfz5gavgrfhpj7.streamlit.app/)
+
 ### Dependencies
 
 ```
