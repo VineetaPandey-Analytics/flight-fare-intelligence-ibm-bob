@@ -465,7 +465,7 @@ fdf = df[mask].copy()
 st.markdown(f"""
 <div class="hero-box">
   <p class="hero-title">✈&nbsp; Flight Fare Intelligence Dashboard</p>
-  <p class="hero-sub">India Domestic Routes &nbsp;|&nbsp; {len(fdf):,} filtered records &nbsp;|&nbsp; 6 Airlines &nbsp;|&nbsp; Real-time Fare Prediction</p>
+  <p class="hero-sub">India Domestic Routes &nbsp;|&nbsp; {len(fdf):,} filtered records &nbsp;|&nbsp; 6 Airlines &nbsp;|&nbsp; Data-Driven Fare Prediction</p>
 </div>
 """, unsafe_allow_html=True)
 
